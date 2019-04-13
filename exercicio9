@@ -1,0 +1,71 @@
+class node:
+    def __init__(self):
+        self.__nome = None
+        self.__proximo = None
+    
+    def getNome(self):
+        return self.__nome
+    
+    def setNome(self, nome):
+        self.__nome = nome
+    
+    def getProx(self):
+        return self.__proximo
+    
+    def setProx(self, prox):
+        self.__proximo = prox
+
+#############################################################    
+
+class fila:
+    def __init__(self):
+        self.__ini = None
+        self.__fim = None
+    
+    def push(self):
+        temp = node()
+        if temp is not None:
+            temp.setNome(input('Digite nome: '))
+            temp.setProx(None)
+            if self.__fim is None:
+                self.__ini = self.__fim = temp
+            else:
+                self.__fim.setProx(temp)
+                self.__fim = temp
+    
+    def printAll(self):
+        if self.__ini is None:
+            return
+        strx = 'Fila:\n'
+        aux = self.__ini
+        while aux is not None:
+            strx += aux.getNome() + '\t'
+            aux = aux.getProx()
+        print(strx)
+    
+    def pop(self):
+        if self.__ini is None:
+            return
+        resp = input('confirma a exclusão?')
+        ##if resp == 'S'
+        if resp.upper() == 'S':
+            self.__ini = self.__ini.getProx()
+        if self.__ini is None:
+            self.__fim = None
+
+###########################################################################
+
+f = fila()
+while True:
+    op = int(input('1 push\n2 pop\n3print all\n4 pop\n5 sair\nopção:'))
+    if op is 1:
+        f.push()
+    elif op is 2:
+        f.pop()
+    elif op is 3:
+        f.printAll()
+    elif op is 4:
+        f.pop()
+    else:
+        del f
+        break
