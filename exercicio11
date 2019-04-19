@@ -1,0 +1,95 @@
+class node:
+    def __init__(self):
+        self.__valor = None
+        self.__proximo = None
+
+    def getValor(self):
+        return self.__valor
+
+    def setValor(self, valor):
+        self.__valor = valor
+
+    def getprox(self):
+        return self.__proximo
+
+    def setProx(self, proximo):
+        self.__proximo = proximo
+
+
+class fila:
+    def __init__(self):
+        self.__iniPar = None
+        self.__fimpar = None
+        self.__ini = None
+        self.__fim = None
+        self.__topo = None
+
+    def push(self):
+        temp = node()
+        if temp is not None:
+            temp.setValor(int(input('valor: ')))
+            if temp.getValor() > 0:
+                temp.setProx(self.__topo)
+                self.__topo = temp
+            else:
+                return
+
+    def pushFila(self):
+        if self.__topo is None:
+            print('Sem valores adicionados...')
+        else:
+            temp = node()
+            tempPosi = node()
+            temp1 = self.__topo
+            while temp1 != None:
+                if temp1.getValor() % 2 == 1:
+                    if temp is not None:
+                        temp.setValor(temp1.getValor())
+                        temp.setProx(None)
+                        temp1 = temp1.getprox()
+                        if self.__fim is None:
+                            self.__ini = self.fim = temp
+                        else:
+                            self.__fim.setProx(temp)
+                            self.__fim = temp            
+                else:
+                    if tempPosi is not None:
+                        tempPosi.setValor(temp1.getValor())
+                        temp1 = temp1.getprox()
+                        tempPosi.setProx(None)
+                        if self.__fimpar is None:
+                            self.__iniPar = self.__fimpar = tempPosi
+                        else:
+                            self.__fimpar.setProx(tempPosi)
+                            self.__fimpar = tempPosi
+                            
+                if self.__ini is None:
+                    print('Fila impar vazia...')
+                else:
+                    strx = 'impares: \t'
+                    aux = self.__ini
+                    while aux is not None:
+                        strx += str(aux.getValor()) + '\t'
+                        aux = aux.getprox()
+                    print(strx)
+                if self.__iniPar is None:
+                    print('Fila par vazia...')
+                else:
+                    stry = 'pares: \t'
+                    aux1 = self.__iniPar
+                    while aux1 is not None:
+                        stry += str(aux1.getValor()) + '\t'
+                        aux1 = aux1.getprox()
+                    print(stry)
+
+
+if __name__ == '__main__':
+    f = fila()
+    while True:
+        op = int(input('1 inserir valores\n2 separar\n3sairznopção: '))
+        if op is 1:
+            f.push()
+        elif op is 2:
+            f.pushFila()
+        else:
+            break
