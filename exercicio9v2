@@ -1,0 +1,72 @@
+class node:
+  def __init__(self):
+    self.__valor = None
+    self.__prox = None
+  
+  def getValor(self):
+    return self.__valor
+  
+  def setValor(self, valor):
+    self.__valor = valor
+  
+  def getProx(self):
+    return self.__prox
+  
+  def setProx(self, prox):
+    self.__prox = prox
+
+
+class Fila:
+  def __init__(self):
+    self.__ini = None
+    self.__fim = None
+  
+  def push(self):
+    temp = node()
+    if temp is not None:
+      temp.setValor(input('valor: '))
+      temp.setProx(None)
+      if self.__fim is None:
+        self.__ini = self.__fim = temp
+      else:
+        self.__fim.setProx(temp)
+        self.__fim = temp
+  
+  def printFirst(self):
+    temp = self.__ini
+    if temp is None:
+      print('fila vazia')
+    else:
+      print(temp.getValor())
+  
+  def printAll(self):
+    if self.__ini is None:
+      return
+    aux = self.__ini
+    strx = 'fila:\t'
+    while aux is not None:
+      strx += str(aux.getValor()) + '\t'
+      aux = aux.getProx()
+    print(strx)
+  
+  def pop(self):
+    if self.__ini is None:
+      return
+    self.__ini = self.__ini.getProx()
+    if self.__ini is None:
+      self.__fim = None
+
+if __name__ == '__main__':
+  f = Fila()
+  while True:
+    op = int(input('Opção:'))
+    if op is 1:
+      f.push()
+    elif op is 2:
+      f.pop()
+    elif op is 3:
+      f.printFirst()
+    elif op is 4:
+      f.printAll()
+    else:
+      break
