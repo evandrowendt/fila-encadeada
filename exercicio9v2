@@ -59,7 +59,7 @@ class Fila:
 if __name__ == '__main__':
   f = Fila()
   while True:
-    op = int(input('Opção:'))
+    op = int(input('1 push\n2 pop\n3imprime primeiro\n4 imprime tudo\nopção: '))
     if op is 1:
       f.push()
     elif op is 2:
