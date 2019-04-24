@@ -1,0 +1,90 @@
+class node:
+    def __init__(self):
+        self.__valor = None
+        self.__prox = None
+    
+    def getValor(self):
+        return self.__valor
+    
+    def setValor(self, valor):
+        self.__valor = valor
+    
+    def getProx(self):
+        return self.__prox
+    
+    def setProx(self, prox):
+        self.__prox = prox
+    
+
+
+class Fila:
+    def __init__(self):
+        self.__iniPar = None
+        self.__fimpar = None
+        self.__ini = None
+        self.__fim = None
+        self.__pilha = []
+
+    def push(self, valor):
+        if int(valor) <= 0:
+            return
+        self.__pilha.append(valor)
+        Fila.push(self, valor=int(input('Valor: ')))
+        #recursiva
+    
+    def filas(self):
+        if len(self.__pilha) is 0:
+            return
+        temp = node()
+        temppar = node()
+        if temp is not None:
+            while len(self.__pilha) is not 0:
+                print('repetindo aqui')
+                if int(self.__pilha[len(self.__pilha)-1]) % 2 is 0:
+                    temppar.setValor(self.__pilha[len(self.__pilha)-1])
+                    temppar.setProx(None)
+                    del self.__pilha[len(self.__pilha)-1]
+                    if self.__fimpar is None:
+                        self.__iniPar = self.__fimpar = temppar
+                    else:
+                        self.__fimpar.setProx(temppar)
+                        self.__fimpar = temppar
+                elif int(self.__pilha[len(self.__pilha)-1]) % 2 is 1:
+                    temp.setValor(self.__pilha[len(self.__pilha)-1])
+                    temp.setProx(None)
+                    del self.__pilha[len(self.__pilha)-1]
+                    if self.__fim is None:
+                        self.__ini = self.__fim = temp
+                    else:
+                        self.__fim.setProx(temp)
+                        self.__fim = temp
+
+    def imprimir(self):
+        aux = self.__iniPar
+        aux1 = self.__ini
+        if aux is None:
+            print('Fila par vazia')
+        else:
+            pares = 'pares: \t'
+            while aux is not None:
+                print('porcariaaa')
+                pares += str(aux.getValor()) + '\t'
+                aux = aux.getProx()
+            print(pares)
+        if aux1 is None:
+            print('fila impar vazia')
+        else:
+            impares = 'impares: \t'
+            while aux1 is not None:
+                # print('aqui essa bosta')
+                impares += str(aux1.getValor()) + '\t'
+                aux1 = aux1.getProx()
+            print(impares)
+
+   
+if __name__ == '__main__':
+
+    f = Fila()
+    f.push(int(input('valor: ')))
+    f.filas()
+    f.imprimir()
